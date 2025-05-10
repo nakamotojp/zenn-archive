@@ -1,0 +1,34 @@
+name: Publish all articles to Qiita
+
+on:
+  push:
+    branches:
+      - main
+  workflow_dispatch:
+
+jobs:
+  publish_articles:
+    runs-on: ubuntu-latest
+
+    steps:
+      - name: Checkout
+        uses: actions/checkout@v4
+
+      - name: Setup Node.js
+        uses: actions/setup-node@v3
+        with:
+          node-version: '20'
+
+      - name: Install qiita-cli
+        run: npm install -g @qiita/qiita-cli
+
+      - name: Create Qiita CLI config file from Secrets
+        run: |
+          echo "access_token: ${{ secrets.QIITA_TOKEN }}" > .qiita-cli-config.yml
+
+      - name: Post all articles to Qiita
+        run: |
+          for file in $(find articles -name "*.md"); do
+            echo "📤 投稿中: $file"
+            qiita post "$file" --config .qiita-cli-config.yml
+          done
