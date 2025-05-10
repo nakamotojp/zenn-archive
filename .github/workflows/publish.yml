@@ -71,6 +71,6 @@ jobs:
 
       - name: Run zenn-qiita-sync
         if: steps.files.outputs.found_files == 'true'
-        uses: C-Naoki/zenn-qiita-sync@main
+        uses: nakamotojp/zenn-qiita-sync@main
         with:
           qiita-token: ${{ secrets.QIITA_TOKEN }}
