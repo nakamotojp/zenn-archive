@@ -20,11 +20,13 @@ jobs:
           node-version: '20'
 
       - name: Install qiita-cli
+        run: npm install -g @qiita/qiita-cli
+
+      - name: Create Qiita CLI config file from Secrets
         run: |
-          npm install -g @qiita/qiita-cli
           echo "access_token: ${{ secrets.QIITA_TOKEN }}" > .qiita-cli-config.yml
 
-      - name: Post all .md files under articles/ to Qiita
+      - name: Post all articles to Qiita
         run: |
           for file in $(find articles -name "*.md"); do
             echo "📤 投稿中: $file"
