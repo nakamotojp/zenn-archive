@@ -2,7 +2,7 @@
 ---
 title: 初心者向けAWS入門ガイド：クラウドの基本からレンタルサーバーとホスティングサーバー、GCPやAzureサービス紹介まで！
 tags: ["AWS", "レンタルサーバー"]
-private: true
+private: false
 ---
 
 ## 🗂️ 目次
